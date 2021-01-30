@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- *** para django *** -->
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <title>Ninja Gold</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col text-center mb-4 p-1 bg-dark text-light border border-secondary rounded">
+                <h2>Ninja GOLD</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 pt-2 mb-3 border border-secondary rounded">
+                <p>Tienes <strong>{{request.session.monedas}}</strong> monedas de oro.</p>
+                <p>{{ juego }}</p>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col text-center m-2 bg-warning border border-secondary rounded">
+                <form id="form_granja" action="process_money" method="post"> {% csrf_token %}
+                    <div class="row justify-content-md-center">
+                        <div class="mb-3 col-4 text-center">
+                            <h4>GRANJA</h4>
+                            <p>(ganas 10 a 20 monedas)</p>
+                            <input type="hidden" name="origen" value="granja">
+                            <input type="hidden" name="min" value="10">
+                            <input type="hidden" name="max" value="20">
+                            <input type="submit" class="btn btn-primary mb-3" form="form_granja" name="granja" value="granja">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col text-center m-2 bg-warning border border-secondary rounded">
+                <form id="form_cueva" name="cueva" action="process_money" method="post"> {% csrf_token %}
+                    <div class="row justify-content-md-center">
+                        <div class="mb-3 col-4 text-center">
+                            <h4>CUEVA</h4>
+                            <p>(ganas 5 a 10 monedas)</p>
+                            <input type="hidden" name="origen" value="cueva">
+                            <input type="hidden" name="min" value="5">
+                            <input type="hidden" name="max" value="10">
+                            <input type="submit" class="btn btn-primary mb-3" form="form_cueva" value="cueva">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col text-center m-2 bg-warning border border-secondary rounded">
+                <form id="form_casa" action="process_money" method="post"> {% csrf_token %}
+                    <div class="row justify-content-md-center">
+                        <div class="mb-3 col-4 text-center">
+                            <h4>CASA</h4>
+                            <p>(ganas 2 a 5 monedas)</p>
+                            <input type="hidden" name="origen" value="casa">
+                            <input type="hidden" name="min" value="2">
+                            <input type="hidden" name="max" value="5">
+                            <input type="submit" class="btn btn-primary mb-3" form="form_casa" value="casa">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col text-center m-2 bg-warning border border-secondary rounded">
+                <form id="form_casino" action="process_money" method="post"> {% csrf_token %}
+                    <div class="row justify-content-md-center">
+                        <div class="mb-3 col-4 text-center">
+                            <h4>CASINO</h4>
+                            <p>(ganas o no? hasta 50 monedas)</p>
+                            <input type="hidden" name="origen" value="casino">
+                            <input type="hidden" name="min" value="-50">
+                            <input type="hidden" name="max" value="50">
+                            <input type="submit" class="btn btn-primary mb-3" form="form_casino" value="casino">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mt-4 border border-secondary rounded align-items-center">
+            <div class="col text-center bg-dark text-light border border-secondary rounded">
+                <h4>Resultados</h4>
+            </div>
+        </div>
+        <div class="row mt-0 border border-secondary rounded align-items-center">
+            <div class="col bg-gradient text-dark border border-secondary rounded">
+                <p>En {{ origen }} {{resultado}} {{cantidad}} monedas de oro</p>
+                {% for jugada in request.session.jugadas %}
+                    <p>{{ jugada }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Option 1: Bootstrap 5 Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
