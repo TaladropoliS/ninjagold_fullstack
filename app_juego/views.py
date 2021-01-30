@@ -11,7 +11,15 @@ def inicio(request):
         request.session['jugadas'] = []
     return render(request, 'index.html')
 
+def reset(request):
+    reset = request.POST['reset']
+    if reset == 'reset':
+        request.session['monedas'] = 0
+        request.session['jugadas'] = []
+    return redirect('/')
+
 def process_money(request):
+
     origen = request.POST['origen']
     min = int(request.POST['min'])
     max = int(request.POST['max'])
@@ -31,38 +39,3 @@ def process_money(request):
     #     'min': min,
     #     'max': max
     # })
-
-def granja(request):
-    juego = request.POST['juego']
-    # if juego == 'granja':
-    resultado = randrange(10, 20)
-    request.session['monedas'] += resultado
-    context = {
-        'resultado':resultado,
-        'juego': granja
-    }
-    return render(request, 'index.html', context)
-
-def cueva(request):
-    resultado = randrange(5, 10)
-    request.session['monedas'] += resultado
-    context = {
-        'resultado': resultado,
-    }
-    return render(request, 'index.html', context)
-
-def casa(request):
-    resultado = randrange(2, 5)
-    request.session['monedas'] += resultado
-    context = {
-        'resultado': resultado
-    }
-    return render(request, 'index.html', context)
-
-def casino(request):
-    resultado = randrange(-50, 50)
-    request.session['monedas'] += resultado
-    context = {
-        'resultado': resultado
-    }
-    return render(request, 'index.html', context)

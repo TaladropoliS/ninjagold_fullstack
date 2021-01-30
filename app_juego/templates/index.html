@@ -26,7 +26,16 @@
         <div class="row">
             <div class="col-6 pt-2 mb-3 border border-secondary rounded">
                 <p>Tienes <strong>{{request.session.monedas}}</strong> monedas de oro.</p>
-                <p>{{ juego }}</p>
+            </div>
+
+            <div class="col-5 pt-2 mb-3 ">
+            </div>
+
+            <div class="col-1 pt-2 mb-3 border border-secondary rounded">
+                <form id="reset" action="reset" method="post"> {% csrf_token %}
+                    <input type="hidden" name="reset" value="reset">
+                    <input type="submit" class="btn btn-primary mb-3" form="reset" name="reset" value="reset">
+                </form>
             </div>
         </div>
         <div class="row">
