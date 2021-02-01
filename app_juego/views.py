@@ -26,7 +26,8 @@ def process_money(request):
 
     resultado = randrange(min, max)
     request.session['monedas'] += resultado
-    jugada = "ganaste %s monedas en %s" % (resultado, origen)
+    # jugada = "ganaste %s monedas en %s" % (resultado, origen)
+    jugada = f"ganaste {resultado} monedas en {origen}"
     request.session['jugadas'].append(jugada)
     context = {
         'resultado': resultado,

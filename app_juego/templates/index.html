@@ -19,7 +19,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col text-center mb-4 p-1 bg-dark text-light border border-secondary rounded">
+            <div class="col text-center mt-2 mb-4 p-1 bg-dark text-light border border-secondary rounded">
                 <h2>Ninja GOLD</h2>
             </div>
         </div>
@@ -108,9 +108,8 @@
                 <h4>Resultados</h4>
             </div>
         </div>
-        <div class="row mt-0 border border-secondary rounded align-items-center">
-            <div class="col bg-gradient text-dark border border-secondary rounded">
-                <p>En {{ origen }} {{resultado}} {{cantidad}} monedas de oro</p>
+        <div id="resultados" class="row border border-secondary rounded align-items-center">
+            <div style="line-height: 1px; max-height: 100px; overflow: scroll;" class="col p-2 bg-gradient text-dark border border-secondary rounded">
                 {% for jugada in request.session.jugadas %}
                     <p>{{ jugada }}</p>
                 {% endfor %}
